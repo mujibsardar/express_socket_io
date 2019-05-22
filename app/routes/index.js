@@ -16,15 +16,15 @@ router.get('/', function(req, res, next) {
 	else{
 		res.render('login', {
 			success: req.flash('success')[0],
-			errors: req.flash('error'), 
+			errors: req.flash('error'),
 			showRegisterForm: req.flash('showRegisterForm')[0]
 		});
 	}
 });
 
 // Login
-router.post('/login', passport.authenticate('local', { 
-	successRedirect: '/rooms', 
+router.post('/login', passport.authenticate('local', {
+	successRedirect: '/rooms',
 	failureRedirect: '/',
 	failureFlash: true
 }));
@@ -75,7 +75,7 @@ router.get('/auth/twitter/callback', passport.authenticate('twitter', {
 		failureFlash: true
 }));
 
-// Rooms
+// All Rooms
 router.get('/rooms', [User.isAuthenticated, function(req, res, next) {
 	Room.find(function(err, rooms){
 		if(err) throw err;
@@ -83,17 +83,20 @@ router.get('/rooms', [User.isAuthenticated, function(req, res, next) {
 	});
 }]);
 
-// Chat Room 
+// Specific Chat Room
 router.get('/chat/:id', [User.isAuthenticated, function(req, res, next) {
 	var roomId = req.params.id;
+
+	
 	Room.findById(roomId, function(err, room){
 		if(err) throw err;
 		if(!room){
-			return next(); 
+			return next();
 		}
 		res.render('chatroom', { user: req.user, room: room });
 	});
-	
+
+
 }]);
 
 // Logout

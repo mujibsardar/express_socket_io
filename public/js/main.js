@@ -35,11 +35,13 @@ var app = {
   },
 
   chat: function(roomId, username){
-    
+
     var socket = io('/chatroom', { transports: ['websocket'] });
 
       // When socket connects, join the current chatroom
       socket.on('connect', function () {
+
+        console.log("Load messages from DB");
 
         socket.emit('join', roomId);
 
@@ -56,12 +58,12 @@ var app = {
 
         // Whenever the user hits the save button, emit newMessage event.
         $(".chat-message button").on('click', function(e) {
-
+          console.log("Load messages from DB");
           var textareaEle = $("textarea[name='message']");
           var messageContent = textareaEle.val().trim();
           if(messageContent !== '') {
-            var message = { 
-              content: messageContent, 
+            var message = {
+              content: messageContent,
               username: username,
               date: Date.now()
             };
@@ -78,7 +80,7 @@ var app = {
           app.helpers.updateNumOfUsers();
         });
 
-        // Append a new message 
+        // Append a new message
         socket.on('addMessage', function(message) {
           app.helpers.addMessage(message);
         });
@@ -104,7 +106,7 @@ var app = {
       }else{
         $('.room-list ul').html('').html(html);
       }
-      
+
       this.updateNumOfRooms();
     },
 
