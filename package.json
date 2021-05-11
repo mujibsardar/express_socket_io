@@ -25,14 +25,16 @@
     "ejs": "^2.5.1",
     "express": "^4.14.0",
     "express-session": "^1.14.0",
+    "mongodb": ">=3.1.13",
     "mongoose": "^5.7.5",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
-    "redis": "^2.6.2",
+    "redis": ">=3.1.1",
     "socket.io": "^2.4.0",
     "socket.io-redis": "^5.1.0",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "xmldom": ">=0.5.0"
   }
 }
